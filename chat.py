@@ -1,7 +1,6 @@
 import openai
 import pyttsx3
 import pinyin
-from translate import Translator
 from credentials import secret
 from prompts import init_prompt
 
