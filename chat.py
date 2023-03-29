@@ -2,7 +2,8 @@ import openai
 import pyttsx3
 import pinyin
 from translate import Translator
-from creds import init_prompt, secret
+from credentials import secret
+from prompts import init_prompt
 
 # Set up the OpenAI API client
 openai.api_key = secret
@@ -10,7 +11,6 @@ openai.api_key = secret
 # Set up the models and prompt
 model_engine = "text-davinci-003"
 speech_engine = pyttsx3.init()
-#translator= Translator(to_lang="English")
 speech_engine.setProperty('voice', "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_ZH-CN_HUIHUI_11.0")
 speech_engine.setProperty('rate', "120")
 
@@ -30,13 +30,11 @@ response = completion.choices[0].text
 print(type(response))
 print(response)
 print(pinyin.get(response, delimiter = ' '))
-#print(translator.translate(response))
 speech_engine.say(response)
 speech_engine.runAndWait()
 
 while True:
     prompt = input(">>> ")
-
     # Generate a response
     completion = openai.Completion.create(
         engine=model_engine,

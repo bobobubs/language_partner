@@ -1,0 +1,1 @@
+secret = "YOUR OPENAI API SECRET KEY" 
