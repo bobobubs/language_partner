@@ -17,7 +17,7 @@ Add your OpenAI secret key to the secret variable in credentials.py
 
 `python .\chat.py`
 
-This will prompt you for your language. Just write it our in english. E.g. Chinese.
+This will prompt you for your language. Just write it out in english. E.g. Chinese.
 After it will prompt you for you experience in the language on a scale from 1-5
 From that point on your conversation will begin. Responses will be played out as audio. For Chinese, the pinyin for the responses will also be displayed.
 After the audio is finished you will be able to type your own responses and continue the conversation.
