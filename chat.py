@@ -12,6 +12,7 @@ model_engine = "text-davinci-003"
 speech_engine = pyttsx3.init()
 #translator= Translator(to_lang="English")
 speech_engine.setProperty('voice', "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_ZH-CN_HUIHUI_11.0")
+speech_engine.setProperty('rate', "120")
 
 init_prompt += input("What language would you like to speak in: \n")
 init_prompt += input("What level is your experiece (1-5): \n")
