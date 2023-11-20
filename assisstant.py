@@ -1,6 +1,7 @@
 from openai import OpenAI
 from prompts import init_prompt
 from credentials import secret
+from AudioRecorder import AudioRecorder
 import time
 
 class LanguagePartnerChatbot:
@@ -47,17 +48,23 @@ class LanguagePartnerChatbot:
             if msg.role == 'assistant':
                 return msg.content[0].text.value
 
-    def start_chat(self):
-        while True:
-            user_input = input("You: ")
-            if user_input.lower() in ['quit', 'exit']:
-                print("Exiting chat...")
-                break
+    def start_audio_chat(self):
+        recorder = AudioRecorder()
+        recorder.start_hotkey_listener()
+        
+        print("Press", recorder.hotkey, "to start recording. Press ESC to exit.")
 
-            self.send_message(user_input)
-            response = self.get_response()
-            print("Assistant:", response)
+        while True:
+            if recorder.new_recording.is_set():
+                transcription = recorder.transcription_queue.get()
+                print("You said:", transcription)
+                self.send_message(transcription)
+                response = self.get_response()
+                print("Assistant:", response)
+                recorder.new_recording.clear()
+    
+    
 
 if __name__ == "__main__":
     chatbot = LanguagePartnerChatbot(api_key=secret, init_prompt=init_prompt)
-    chatbot.start_chat()
+    chatbot.start_audio_chat()
